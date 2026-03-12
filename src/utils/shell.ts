@@ -30,7 +30,7 @@ export const shell = async (
     setHistory(output);
   } else {
     // Show loading, then replace with AI reply
-    setHistory('<span class="text-light-gray dark:text-dark-gray">[AI] Thinking...</span>');
+    setHistory('<span class="text-light-gray dark:text-dark-gray ai-loading">[AI] Thinking</span>');
     const reply = await askLLM(command);
     if (updateLastHistory) {
       updateLastHistory(`<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${reply}`);

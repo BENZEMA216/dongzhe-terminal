@@ -40,6 +40,16 @@ div#__next > div {
   background: #ff8037;
 }
 
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.ai-loading::after {
+  content: '▌';
+  animation: blink 0.8s step-end infinite;
+}
+
 .credit-btn {
   position: fixed;
   bottom: 12px;
