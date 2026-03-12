@@ -359,24 +359,16 @@ export const ask = async (args: string[]): Promise<string> => {
 export const benzema = async (args?: string[]): Promise<string> => {
   return `
 <span class="text-light-green dark:text-dark-green">
-                   ,,)))))))));,
-                __/\\'(  (((((((((((\\\\
-             //' '))  ))))))))))))\\\\\\
-            //  \\      _____    ))\\\\\\
-           ||    \\  /  /    \\   )  )\\\\
-           ||     |/  |      |      )||
-           ||        /       /     / ||
-            \\\\      /  /    /     /  //
-             \\\\___/   |   .'    /  //
-              \\\\      |  |     /  //
-               ))      \\ |    /  ((
-              //        \\|   /    \\\\
-                         |  /
-                         | /
-                         |/
-                         |
+               ._ o o
+               \\_\`-)|_
+            ,""       \\
+          ,"  ## |   ಠ ಠ.
+        ," ##   ,-\\__    \`.
+      ,"       /     \`--._;)
+    ,"     ## /
+  ,"   ##    /
 </span>
-<span class="text-light-yellow dark:text-dark-yellow">  🐴 BENZEMA — The Horse That Never Stops Running</span>
+<span class="text-light-yellow dark:text-dark-yellow">  BENZEMA — The Horse That Never Stops Running 🐴</span>
 
   <span class="text-light-gray dark:text-dark-gray">You found the easter egg! Yes, 小马 (Xiaoma) means "little horse".</span>
   <span class="text-light-gray dark:text-dark-gray">And like Karim Benzema — elegant, clutch, always delivering.</span>
