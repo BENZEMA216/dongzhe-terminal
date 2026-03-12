@@ -1,0 +1,35 @@
+{
+  "readmeUrl": "https://raw.githubusercontent.com/BENZEMA216/BENZEMA216/main/README.md",
+  "title": "Dongzhe Zhu — Terminal",
+  "name": "Dongzhe Zhu",
+  "ascii": "dongzhe",
+  "social": {
+    "github": "BENZEMA216",
+    "linkedin": "dongzhe-zhu"
+  },
+  "email": "BENZEMAZDZ99@gmail.com",
+  "ps1_hostname": "dongzhe.dev",
+  "ps1_username": "visitor",
+  "repo": "https://github.com/BENZEMA216",
+  "resume_url": "../resume.pdf",
+  "colors": {
+    "light": {
+      "background": "#F8F8F2",
+      "foreground": "#282a36",
+      "yellow": "#ffb86c",
+      "green": "#50fa7b",
+      "gray": "#8B6BB9",
+      "blue": "#67AFC0",
+      "red": "#ff5555"
+    },
+    "dark": {
+      "background": "#1a1a2e",
+      "foreground": "#e0e0e0",
+      "yellow": "#ffb86c",
+      "green": "#50fa7b",
+      "gray": "#bd93f9",
+      "blue": "#8be9fd",
+      "red": "#ff5555"
+    }
+  }
+}
