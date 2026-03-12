@@ -39,7 +39,7 @@ export const help = async (args: string[]): Promise<string> => {
 export const about = async (args: string[]): Promise<string> => {
   return t(
     `
-<span class="text-light-green dark:text-dark-green">Dongzhe Zhu (朱东哲)</span> — AI Product Manager × Builder
+<span class="text-light-green dark:text-dark-green">东哲 (Xiaoma)</span> — AI Product Manager × Builder
 
 Currently at <span class="text-light-blue dark:text-dark-blue">ByteDance</span>, building the Creative AGENT for Jimeng AI from 0→1.
 Previously shipped LLM-powered data products at <span class="text-light-blue dark:text-dark-blue">Tencent</span>, winning the 2023 Business Breakthrough Award.
@@ -52,7 +52,7 @@ Type 'projects' for what I've built.
 Type 'sumfetch' for a neofetch-style summary.
 `,
     `
-<span class="text-light-green dark:text-dark-green">朱东哲 (Dongzhe Zhu)</span> — AI 产品经理 × 创造者
+<span class="text-light-green dark:text-dark-green">东哲 (小马)</span> — AI 产品经理 × 创造者
 
 现在在<span class="text-light-blue dark:text-dark-blue">字节跳动</span>，从 0→1 打造即梦 AI 创作 AGENT。
 此前在<span class="text-light-blue dark:text-dark-blue">腾讯</span>做 LLM 驱动的数据产品，获 2023 年度业务突破奖。
@@ -353,6 +353,34 @@ export const ask = async (args: string[]): Promise<string> => {
   } catch {
     return t('Failed to reach AI. Try again later.', 'AI 连接失败，请稍后再试。');
   }
+};
+
+// Easter egg
+export const benzema = async (args?: string[]): Promise<string> => {
+  return `
+<span class="text-light-green dark:text-dark-green">
+                   ,,)))))))));,
+                __/\\'(  (((((((((((\\\\
+             //' '))  ))))))))))))\\\\\\
+            //  \\      _____    ))\\\\\\
+           ||    \\  /  /    \\   )  )\\\\
+           ||     |/  |      |      )||
+           ||        /       /     / ||
+            \\\\      /  /    /     /  //
+             \\\\___/   |   .'    /  //
+              \\\\      |  |     /  //
+               ))      \\ |    /  ((
+              //        \\|   /    \\\\
+                         |  /
+                         | /
+                         |/
+                         |
+</span>
+<span class="text-light-yellow dark:text-dark-yellow">  🐴 BENZEMA — The Horse That Never Stops Running</span>
+
+  <span class="text-light-gray dark:text-dark-gray">You found the easter egg! Yes, 小马 (Xiaoma) means "little horse".</span>
+  <span class="text-light-gray dark:text-dark-gray">And like Karim Benzema — elegant, clutch, always delivering.</span>
+`;
 };
 
 // Banner
