@@ -1,131 +1,132 @@
-# [💻 LiveTerm - build terminal styled websites in minutes!](https://liveterm.vercel.app)
+# dongzhe-terminal
 
-Highly customizable, easy-to-use, and minimal terminal styled website template, powered by Next.js.
+Terminal-style personal website with built-in AI chat. Fork it, edit `config.json`, deploy to Vercel in 5 minutes.
 
-Building a simple website with LiveTerm only takes **minutes**, and you only need to work with **one** file: `config.json`. After you cloned this repository, simply run `yarn install && yarn dev` and start editing `config.json` to build your website!
+**Live demo:** [dongzhe-terminal.vercel.app](https://dongzhe-terminal.vercel.app)
 
-LiveTerm can be used to build a variety of websites:
+```
+visitor@dongzhe.dev:$ ~ hello
+[AI] Thinking▌
+[AI] Hey! I'm 东哲, AI PM at ByteDance. What can I help you with?
 
-- [personal website](https://cveinnt.com)
-- [browser startpage](https://livetermstart.vercel.app/)
-- [project page](https://liveterm.vercel.app/)
-- or maybe just a cool browser music player...be creative!
+visitor@dongzhe.dev:$ ~ benzema
+🐴 BENZEMA — The Horse That Never Stops Running
+```
 
-Feel free to play with the web demo above!
+## Features
 
-## 📸 Showcase
+- **AI Chat** — Unknown commands auto-route to GPT. Visitors can chat with your AI persona
+- **Bilingual** — `lang zh` / `lang en` to switch Chinese/English
+- **Terminal UX** — Tab completion, command history (arrow keys), Ctrl+L clear
+- **Customizable** — Edit `config.json` for identity, `commands.ts` for content, `chat.ts` for AI persona
+- **Security** — Rate limiting (20 req/min/IP), input length cap, prompt injection defense
+- **Easter eggs** — Hidden commands for fun (try `benzema`, `sudo`, `vim`)
 
-<p align="center">
-<img src="./demo/demo.gif" width="600"><br>
-<strong>LiveTerm with different themes</strong>
-</p>
-
-<p align="center">
-<img src="./demo/cveinnt.png" width="600"><br>
-<strong><a href="https://cveinnt.com" target=_blank>my personal website</a></strong>
-</p>
-
-## 🚀 Ship your LiveTerm site in less than 5 minutes
-
-LiveTerm requires the `yarn` package manager. You can install `yarn` [here](https://classic.yarnpkg.com/lang/en/docs/install/).
-
-Simply run the following commmand in your terminal:
+## Quick Start
 
 ```bash
-sh -c "$(curl -fsSL https://raw.github.com/Cveinnt/LiveTerm/main/install/install.sh)"
+# 1. Fork & clone
+git clone https://github.com/YOUR_USERNAME/dongzhe-terminal.git
+cd dongzhe-terminal
+
+# 2. Install
+npm install
+
+# 3. Configure
+cp .env.example .env.local
+# Edit .env.local → add your OpenAI API key
+
+# 4. Run
+npm run dev
 ```
 
-This will install LiveTerm to the current directory. You can start building your website with:
+Open [localhost:3000](http://localhost:3000).
 
-```bash
-cd LiveTerm && yarn dev
-```
+## Make It Yours
 
-Start editing `config.json` and try saving and see the updated changes!
+### 1. Basic info → `config.json`
 
-Alternatively, you can clone this repository to a location of your choosing
-
-```bash
-git clone https://github.com/Cveinnt/LiveTerm.git && cd LiveTerm
-```
-
-Then install dependencies and start developing there:
-
-```bash
-yarn install && yarn dev
-```
-
-### Docker Usage
-
-First, clone the project and edit `config.json` to your liking. Then run the following to start the container in the background:
-
-```shell
-docker-compose up -d
-```
-
-If you **know** what you were doing, you can also try changing `Dockerfile` & `docker-compose.yml`!
-Learn more about Docker [here](https://docs.docker.com/get-started/overview/ 'here').
-
-## 📄 Configuration
-
-### Basic Configuration
-
-90% of LiveTerm's configurations are done through the `config.json` file.
-
-```javascript
+```json
 {
-  "readmeUrl": // create a Github README and link it here!
-  "title": // title of the website
-  "name": // your name, included in 'about' command
-  "ascii": // ascii art to display
-  "social": {
-    "github": // your handle
-    "linkedin": // your handle
-  },
-  "email": // your email
-  "ps1_hostname": "liveterm" // hostname in prompt
-  "ps1_username": "visitor", // username in prompt
-  "resume_url": "../resume.pdf", // path to your resume
-  "non_terminal_url": "W",
-  "colors": {
-    "light": {
-      ...
-    },
-    "dark": {
-      ... // you can use existing templates in themes.json or use your own!
-    }
+  "title": "Your Name — Terminal",
+  "name": "Your Name",
+  "social": { "github": "your-handle" },
+  "email": "you@email.com",
+  "ps1_hostname": "your.dev",
+  "ps1_username": "visitor"
+}
+```
+
+### 2. Content → `src/utils/bin/commands.ts`
+
+Edit the `about`, `experience`, `projects`, `skills`, `education`, `contact` functions. Each returns an HTML string displayed in the terminal.
+
+### 3. AI persona → `src/pages/api/chat.ts`
+
+Replace the `SYSTEM_PROMPT` with your own profile. The AI will answer as you.
+
+### 4. Banner → `src/utils/bin/commands.ts`
+
+Replace the ASCII art in the `banner` function. Generate yours at [manytools.org/hacker-tools/ascii-banner](https://manytools.org/hacker-tools/ascii-banner/).
+
+### 5. Theme → `config.json` colors
+
+```json
+"colors": {
+  "dark": {
+    "background": "#1a1a2e",
+    "foreground": "#e0e0e0",
+    "green": "#50fa7b",
+    "yellow": "#ffb86c",
+    "blue": "#8be9fd",
+    "gray": "#bd93f9",
+    "red": "#ff5555"
   }
 }
 ```
 
-Feel free to change it as you see fit!
+More themes in `themes.json`.
 
-### Themes
+## Deploy to Vercel
 
-You can find several pre-configured themes in `themes.json`, and you can replace the colors in `config.json` with the theme color you like! The themes are based on the themes on [this website](https://glitchbone.github.io/vscode-base16-term/#/).
+```bash
+# Install Vercel CLI
+npm i -g vercel
 
-For a better preview of the themes, checkout the images in the `demo` folder.
+# Deploy
+vercel --prod
 
-### Favicons
+# Set environment variable
+vercel env add OPENAI_API_KEY production
+# Paste your key, then redeploy
+vercel --prod
+```
 
-Favicons are located in `public/`, along with the other files you may want to upload to your website. I used this [website](https://www.favicon-generator.org/) to generate favicons.
+Or connect your GitHub repo to [vercel.com](https://vercel.com) for auto-deploy on push. Add `OPENAI_API_KEY` in Settings → Environment Variables.
 
-### Banner
+## Architecture
 
-You may also want to change the output of the `banner` command. To do that, simply paste your generated banner in `src/utils/bin/commands.ts`. I used this [website](https://manytools.org/hacker-tools/ascii-banner/) to generate my banner.
+```
+src/
+├── pages/
+│   ├── api/chat.ts        # AI chat endpoint (OpenAI API)
+│   └── index.tsx           # Main page
+├── components/
+│   ├── input.tsx           # Terminal input with loading state
+│   └── history/            # Command history display
+├── utils/
+│   ├── bin/commands.ts     # All terminal commands
+│   └── shell.ts            # Command router (built-in → direct, unknown → AI)
+└── styles/global.css       # Terminal styling + loading animation
+```
 
-### Advanced Configuration
+## Tech Stack
 
-If you want to further customize your page, feel free to change the source code to your liking!
-
-## 🌐 Deploy on Vercel
-
-The easiest way to deploy a Next.js app is to use the [Vercel Platform](https://vercel.com/) from the creators of Next.js.
-
-You can install `vercel` cli and follow the instruction [here](https://vercel.com/docs/concepts/deployments/overview).
-
-You can also connect your github account to vercel and have vercel automatically deploy the github repository for you.
+- **Next.js 14** + TypeScript
+- **Tailwind CSS** — Terminal styling
+- **OpenAI API** — gpt-4o-mini for chat
+- **Vercel** — Serverless deployment
 
 ## Credit
 
-Based on M4TT72's awesome [Terminal](https://github.com/m4tt72/terminal).
+Built on top of [LiveTerm](https://github.com/Cveinnt/LiveTerm) by Cveinnt, which is based on [Terminal](https://github.com/m4tt72/terminal) by M4TT72. AI chat and bilingual features added by [BENZEMA216](https://github.com/BENZEMA216).
