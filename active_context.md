@@ -3,21 +3,17 @@
 ## Current State (2026-03-12)
 - Site live at https://dongzhe-terminal.vercel.app
 - AI chat operational: OpenAI API (gpt-4o-mini), key in Vercel env vars
-- System prompt synced from GitHub README, privacy-hardened (no full name)
-- Security: rate limit 20req/min/IP, 500 char limit, prompt injection defense
+- Repo open-sourced with fork-friendly README and .env.example
+- Loading state: blinking cursor with duplicate submission prevention
 
-## Recent Changes
-- Full name replaced with 东哲/小马 everywhere (config, commands, system prompt)
-- System prompt explicitly forbids AI from revealing surname
-- Added `benzema` easter egg command (horse ASCII art)
-- System prompt updated from GitHub profile README for accuracy
+## Key Decisions
+- Privacy: no full name exposed, AI forbidden from revealing surname
+- OpenAI API (not OpenClaw) - Vercel serverless cant reach private servers
+- API key server-side only via Vercel env vars
+- System prompt synced from GitHub profile README
 
-## Architecture
-- Next.js 14 + TypeScript, terminal-style UI
-- Vercel hosting, Vercel CLI for deployment
-- `/api/chat` serverless function → OpenAI API (server-side key only)
-
-## Privacy Decision
-- No full legal name exposed anywhere on site
-- AI instructed to only use 东哲 or 小马
-- Reason: public-facing site, minimize personal info exposure
+## Features Shipped
+- Terminal commands: about, experience, projects, skills, education, contact, ask, benzema (easter egg)
+- Bilingual (zh/en), unknown commands route to AI chat
+- AI references GitHub repos naturally in responses
+- Open-source README with 5-min fork-and-deploy guide
