@@ -16,6 +16,7 @@ export const shell = async (
   setHistory: (value: string) => void,
   clearHistory: () => void,
   setCommand: React.Dispatch<React.SetStateAction<string>>,
+  updateLastHistory?: (value: string) => void,
 ) => {
   const args = command.split(' ');
   args[0] = args[0].toLowerCase();
@@ -28,9 +29,12 @@ export const shell = async (
     const output = await bin[args[0]](args.slice(1));
     setHistory(output);
   } else {
-    // Route unknown commands to LLM as conversation
+    // Show loading, then replace with AI reply
+    setHistory('<span class="text-light-gray dark:text-dark-gray">[AI] Thinking...</span>');
     const reply = await askLLM(command);
-    setHistory(`<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${reply}`);
+    if (updateLastHistory) {
+      updateLastHistory(`<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${reply}`);
+    }
   }
 
   setCommand('');

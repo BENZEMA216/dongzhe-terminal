@@ -20,6 +20,17 @@ export const useHistory = (defaultValue: Array<History>) => {
           output: value,
         },
       ]),
+    updateLastHistory: (value: string) =>
+      setHistory((prev) => {
+        const updated = [...prev];
+        if (updated.length > 0) {
+          updated[updated.length - 1] = {
+            ...updated[updated.length - 1],
+            output: value,
+          };
+        }
+        return updated;
+      }),
     setCommand,
     setLastCommandIndex,
     clearHistory: () => setHistory([]),

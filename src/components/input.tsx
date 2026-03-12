@@ -12,6 +12,7 @@ export const Input = ({
   lastCommandIndex,
   setCommand,
   setHistory,
+  updateLastHistory,
   setLastCommandIndex,
   clearHistory,
 }) => {
@@ -40,7 +41,7 @@ export const Input = ({
     if (event.key === 'Enter' || event.code === '13') {
       event.preventDefault();
       setLastCommandIndex(0);
-      await shell(command, setHistory, clearHistory, setCommand);
+      await shell(command, setHistory, clearHistory, setCommand, updateLastHistory);
       containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
     }
 
