@@ -23,19 +23,21 @@ export const shell = async (
 
   if (args[0] === 'clear') {
     clearHistory();
+    setCommand('');
   } else if (command === '') {
     setHistory('');
+    setCommand('');
   } else if (Object.keys(bin).indexOf(args[0]) !== -1) {
     const output = await bin[args[0]](args.slice(1));
     setHistory(output);
+    setCommand('');
   } else {
-    // Show loading, then replace with AI reply
+    // Clear input immediately, show loading, then replace with AI reply
+    setCommand('');
     setHistory('<span class="text-light-gray dark:text-dark-gray ai-loading">[AI] Thinking</span>');
     const reply = await askLLM(command);
     if (updateLastHistory) {
       updateLastHistory(`<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${reply}`);
     }
   }
-
-  setCommand('');
 };

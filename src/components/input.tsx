@@ -16,6 +16,8 @@ export const Input = ({
   setLastCommandIndex,
   clearHistory,
 }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const onSubmit = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     const commands: [string] = history
       .map(({ command }) => command)
@@ -40,8 +42,11 @@ export const Input = ({
 
     if (event.key === 'Enter' || event.code === '13') {
       event.preventDefault();
+      if (isLoading) return;
       setLastCommandIndex(0);
+      setIsLoading(true);
       await shell(command, setHistory, clearHistory, setCommand, updateLastHistory);
+      setIsLoading(false);
       containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
     }
 
