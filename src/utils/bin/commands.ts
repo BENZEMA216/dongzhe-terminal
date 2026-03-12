@@ -338,6 +338,23 @@ export const emacs = async (args?: string[]): Promise<string> => {
   return `I use Claude Code, btw.`;
 };
 
+// Ask AI
+export const ask = async (args: string[]): Promise<string> => {
+  if (!args.length) {
+    return t(
+      `Usage: ask [question]\nOr just type anything — unrecognized commands go to AI automatically.`,
+      `用法：ask [问题]\n或者直接输入任何内容——未识别的命令会自动交给 AI 回答。`
+    );
+  }
+  const axios = (await import('axios')).default;
+  try {
+    const { data } = await axios.post('/api/chat', { message: args.join(' ') });
+    return `<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${data.reply}`;
+  } catch {
+    return t('Failed to reach AI. Try again later.', 'AI 连接失败，请稍后再试。');
+  }
+};
+
 // Banner
 export const banner = (args?: string[]): string => {
   return `
@@ -357,6 +374,7 @@ GitHub repos as PRDs. Claude Max 20x user. Vibe coding believer.
 Type '<span class="text-light-yellow dark:text-dark-yellow">help</span>' to see all commands.
 Type '<span class="text-light-yellow dark:text-dark-yellow">about</span>' to learn about me.
 Type '<span class="text-light-yellow dark:text-dark-yellow">lang zh</span>' to switch to Chinese / 切换中文.
+Or just <span class="text-light-green dark:text-dark-green">type anything</span> to chat with my AI. Try: <span class="text-light-yellow dark:text-dark-yellow">what do you do?</span>
 
 Visit <a class="text-light-blue dark:text-dark-blue underline" href="https://github.com/BENZEMA216" target="_blank">github.com/BENZEMA216</a> for all my work.
 `;

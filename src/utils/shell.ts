@@ -1,5 +1,15 @@
 import React from 'react';
 import * as bin from './bin';
+import axios from 'axios';
+
+const askLLM = async (message: string): Promise<string> => {
+  try {
+    const { data } = await axios.post('/api/chat', { message });
+    return data.reply;
+  } catch (error) {
+    return 'Failed to reach AI. Try built-in commands: help';
+  }
+};
 
 export const shell = async (
   command: string,
@@ -14,13 +24,13 @@ export const shell = async (
     clearHistory();
   } else if (command === '') {
     setHistory('');
-  } else if (Object.keys(bin).indexOf(args[0]) === -1) {
-    setHistory(
-      `shell: command not found: ${args[0]}. Try 'help' to get started.`,
-    );
-  } else {
+  } else if (Object.keys(bin).indexOf(args[0]) !== -1) {
     const output = await bin[args[0]](args.slice(1));
     setHistory(output);
+  } else {
+    // Route unknown commands to LLM as conversation
+    const reply = await askLLM(command);
+    setHistory(`<span class="text-light-gray dark:text-dark-gray">[AI]</span> ${reply}`);
   }
 
   setCommand('');
